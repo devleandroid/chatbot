@@ -13,7 +13,7 @@
         android:verticalScrollbarPosition="right"
         android:background="#88BABABA"
         android:backgroundTint="#FFBABABA"
-        android:padding="10dp">
+        android:padding="10dp"/>
 
         <TextView
             android:id="@+id/text"
@@ -21,7 +21,5 @@
             android:layout_height="wrap_content"
             android:text="Hello"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-    </ImageView>
-
 
 </LinearLayout>

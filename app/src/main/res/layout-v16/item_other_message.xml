@@ -16,7 +16,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:background="#8800bcd4"
-            android:backgroundTint="#ff00bcd4"/>
+            android:backgroundTint="#ff00bcd4"
+            android:importantForAccessibility="no" />
 
             <TextView
                 android:id="@+id/text"
