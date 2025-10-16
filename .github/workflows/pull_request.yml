@@ -7,20 +7,34 @@ on:
     branches: [ "master" ]
 
 jobs:
-  test:
+  build:
+    name: Build and Test
     runs-on: ubuntu-latest
 
-
     steps:
-    - uses: actions/checkout@v4
-    - name: set up JDK 11
-      uses: actions/setup-java@v4
-      with:
-        java-version: '11'
-        distribution: 'temurin'
-        cache: gradle
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew clean testDebug
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'          # use 11 se o projeto exigir, mas 17 é padrão Android moderno
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Grant execute permission for Gradle wrapper
+        run: chmod +x gradlew
+
+      - name: Build and run unit tests
+        run: ./gradlew clean testDebug --stacktrace
+
+      - name: Build APK (optional)
+        if: success()
+        run: ./gradlew assembleDebug
+
+      - name: Upload build outputs
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: app/build/outputs/apk/debug/app-debug.apk
